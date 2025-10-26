@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Examen Final - Aplicaciones Web</title>
+  <style>
+    body { font-family: Arial; background: #f4f4f4; padding: 20px; }
+    h1 { text-align: center; color: #2c3e50; }
+    .question { background: #fff; padding: 15px; margin: 10px 0; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    button { background: #2c3e50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #1a242f; }
+    #result { font-weight: bold; font-size: 1.2em; text-align: center; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Examen Final - Aplicaciones Web</h1>
+  <form id="quizForm">
+<div class="question">
+  <p>1. ¿Qué significa HTML?</p>
+  <label><input type="radio" name="q1" value="1"> HyperText Markup Language</label><br>
+  <label><input type="radio" name="q1" value="0"> Hyper Transfer Markup Language</label><br>
+  <label><input type="radio" name="q1" value="0"> HighText Machine Language</label><br>
+  <label><input type="radio" name="q1" value="0"> Home Tool Markup Language</label>
+</div>
+
+<div class="question">
+  <p>2. ¿Qué protocolo se utiliza para una conexión segura?</p>
+  <label><input type="radio" name="q2" value="0"> HTTP</label><br>
+  <label><input type="radio" name="q2" value="1"> HTTPS</label><br>
+  <label><input type="radio" name="q2" value="0"> FTP</label><br>
+  <label><input type="radio" name="q2" value="0"> SMTP</label>
+</div>
+
+<div class="question">
+  <p>3. ¿Qué propiedad CSS se usa para cambiar el color del texto?</p>
+  <label><input type="radio" name="q3" value="1"> color</label><br>
+  <label><input type="radio" name="q3" value="0"> background-color</label><br>
+  <label><input type="radio" name="q3" value="0"> font-style</label><br>
+  <label><input type="radio" name="q3" value="0"> text-align</label>
+</div>
+
+<div class="question">
+  <p>4. ¿Qué etiqueta se usa para insertar una imagen en HTML?</p>
+  <label><input type="radio" name="q4" value="1"> &lt;img&gt;</label><br>
+  <label><input type="radio" name="q4" value="0"> &lt;image&gt;</label><br>
+  <label><input type="radio" name="q4" value="0"> &lt;src&gt;</label><br>
+  <label><input type="radio" name="q4" value="0"> &lt;picture&gt;</label>
+</div>
+
+<div class="question">
+  <p>5. ¿Qué propiedad CSS permite redondear las esquinas de un elemento?</p>
+  <label><input type="radio" name="q5" value="1"> border-radius</label><br>
+  <label><input type="radio" name="q5" value="0"> border-style</label><br>
+  <label><input type="radio" name="q5" value="0"> box-shadow</label><br>
+  <label><input type="radio" name="q5" value="0"> outline</label>
+</div>
+
+<div class="question">
+  <p>6. ¿Qué etiqueta se usa para crear un formulario en HTML?</p>
+  <label><input type="radio" name="q6" value="1"> &lt;form&gt;</label><br>
+  <label><input type="radio" name="q6" value="0"> &lt;input&gt;</label><br>
+  <label><input type="radio" name="q6" value="0"> &lt;label&gt;</label><br>
+  <label><input type="radio" name="q6" value="0"> &lt;fieldset&gt;</label>
+</div>
+
+<div class="question">
+  <p>7. ¿Qué hace la propiedad CSS <code>float: left;</code>?</p>
+  <label><input type="radio" name="q7" value="1"> Hace que el elemento flote a la izquierda</label><br>
+  <label><input type="radio" name="q7" value="0"> Centra el elemento</label><br>
+  <label><input type="radio" name="q7" value="0"> Oculta el elemento</label><br>
+  <label><input type="radio" name="q7" value="0"> Aplica sombra al elemento</label>
+</div>
+
+<div class="question">
+  <p>8. ¿Qué es XAMPP?</p>
+  <label><input type="radio" name="q8" value="1"> Un paquete que incluye Apache, MySQL, PHP y Perl</label><br>
+  <label><input type="radio" name="q8" value="0"> Un lenguaje de programación</label><br>
+  <label><input type="radio" name="q8" value="0"> Un navegador web</label><br>
+  <label><input type="radio" name="q8" value="0"> Un sistema operativo</label>
+</div>
+
+<div class="question">
+  <p>9. ¿Qué propiedad CSS se usa para aplicar sombra a un texto?</p>
+  <label><input type="radio" name="q9" value="1"> text-shadow</label><br>
+  <label><input type="radio" name="q9" value="0"> box-shadow</label><br>
+  <label><input type="radio" name="q9" value="0"> font-shadow</label><br>
+  <label><input type="radio" name="q9" value="0"> shadow-text</label>
+</div>
+
+<div class="question">
+  <p>10. ¿Qué propiedad CSS se usa para aplicar sombra a una caja?</p>
+  <label><input type="radio" name="q10" value="1"> box-shadow</label><br>
+  <label><input type="radio" name="q10" value="0"> text-shadow</label><br>
+  <label><input type="radio" name="q10" value="0"> shadow-box</label><br>
+  <label><input type="radio" name="q10" value="0"> border-shadow</label>
+</div>
+
+<div class="question">
+  <p>11. ¿Qué significa CSS?</p>
+  <label><input type="radio" name="q11" value="1"> Cascading Style Sheets</label><br>
+  <label><input type="radio" name="q11" value="0"> Computer Style Syntax</label><br>
+  <label><input type="radio" name="q11" value="0"> Creative Style System</label><br>
+  <label><input type="radio" name="q11" value="0"> Custom Style Sheet</label>
+</div>
+
+<div class="question">
+  <p>12. ¿Qué propiedad CSS se usa para ocultar un elemento sin eliminar su espacio?</p>
+  <label><input type="radio" name="q12" value="1"> visibility: hidden</label><br>
+  <label><input type="radio" name="q12" value="0"> display: none</label><br>
+  <label><input type="radio" name="q12" value="0"> opacity: 0</label><br>
+  <label><input type="radio" name="q12" value="0"> hidden: true</label>
+</div>
+
+<div class="question">
+  <p>13. ¿Qué propiedad CSS elimina completamente un elemento del flujo del documento?</p>
+  <label><input type="radio" name="q13" value="1"> display: none</label><br>
+  <label><input type="radio" name="q13" value="0"> visibility: hidden</label><br>
+  <label><input type="radio" name="q13" value="0"> opacity: 0</label><br>
+  <label><input type="radio" name="q13" value="0"> float: left</label>
+</div>
+
+<div class="question">
+  <p>14. ¿Qué etiqueta HTML se usa para crear una lista ordenada?</p>
+  <label><input type="radio" name="q14" value="1"> &lt;ol&gt;</label><br>
+  <label><input type="radio" name="q14" value="0"> &lt;ul&gt;</label><br>
+  <label><input type="radio" name="q14" value="0"> &lt;li&gt;</label><br>
+  <label><input type="radio" name="q14" value="0"> &lt;dl&gt;</label>
+</div>
+
+<div class="question">
+  <p>15. ¿Qué propiedad CSS se usa para aplicar un borde punteado?</p>
+  <label><input type="radio" name="q15" value="1"> border-style: dotted</label><br>
+  <label><input type="radio" name="q15" value="0"> border-type: dotted</label><br>
+  <label><input type="radio" name="q15" value="0"> border: dashed</label><br>
+  <label><input type="radio" name="q15" value="0"> outline-style: dotted</label>
+</div>
+
+<div class="question">
+  <p>16. ¿Qué etiqueta HTML se usa para definir una celda en una tabla?</p>
+  <label><input type="radio" name="q16" value="1"> &lt;td&gt;</label><br>
+  <label><input type="radio" name="q16" value="0"> &lt;tr&gt;</label><br>
+  <label><input type="radio" name="q16" value="0"> &lt;th&gt;</label><br>
+  <label><input type="radio" name="q16" value="0"> &lt;table&gt;</label>
+</div>
+
+<div class="question">
+  <p>17. ¿Qué etiqueta HTML se usa para definir una fila en una tabla?</p>
+  <label><input type="radio" name="q17" value="1"> &lt;tr&gt;</label><br>
+  <label><input type="radio" name="q17" value="0"> &lt;td&gt;</label><br>
+  <label><input type="radio" name="q17" value="0"> &lt;th&gt;</label><br>
+  <label><input type="radio" name="q17" value="0"> &lt;table&gt;</label>
+</div>
+
+<div class="question">
+  <p>18. ¿Qué etiqueta HTML se usa para definir el encabezado de una tabla?</p>
+  <label><input type="radio" name="q18" value="1"> &lt;th&gt;</label><br>
+  <label><input type="radio" name="q18" value="0"> &lt;td&gt;</label><br>
+  <label><input type="radio" name="q18" value="0"> &lt;tr&gt;</label><br>
+  <label><input type="radio" name="q18" value="0"> &lt;thead&gt;</label>
+</div>
+
+<div class="question">
+  <p>19. ¿Qué etiqueta HTML se usa para definir el cuerpo de una tabla?</p>
+  <label><input type="radio" name="q19" value="1"> &lt;tbody&gt;</label><br>
+  <label><input type="radio" name="q19" value="0"> &lt;table&gt;</label><br>
+  <label><input type="radio" name="q19" value="0"> &lt;body&gt;</label><br>
+  <label><input type="radio" name="q19" value="0"> &lt;tr&gt;</label>
+</div>
+
+<div class="question">
+  <p>20. ¿Qué etiqueta HTML se usa para definir el pie de una tabla?</p>
+  <label><input type="radio" name="q20" value="1"> &lt;tfoot&gt;</label><br>
+  <label><input type="radio" name="q20" value="0"> &lt;footer&gt;</label><br>
+  <label><input type="radio" name="q20" value="0"> &lt;bottom&gt;</label><br>
+  <label><input type="radio" name="q20" value="0"> &lt;end&gt;</label>
+</div>
+
+<div class="question">
+  <p>21. ¿Qué atributo HTML se usa para especificar la dirección de un enlace?</p>
+  <label><input type="radio" name="q21" value="1"> href</label><br>
+  <label><input type="radio" name="q21" value="0"> src</label><br>
+  <label><input type="radio" name="q21" value="0"> link</label><br>
+  <label><input type="radio" name="q21" value="0"> url</label>
+</div>
+
+<div class="question">
+  <p>22. ¿Qué etiqueta HTML se usa para crear un enlace?</p>
+  <label><input type="radio" name="q22" value="1"> &lt;a&gt;</label><br>
+  <label><input type="radio" name="q22" value="0"> &lt;link&gt;</label><br>
+  <label><input type="radio" name="q22" value="0"> &lt;href&gt;</label><br>
+  <label><input type="radio" name="q22" value="0"> &lt;url&gt;</label>
+</div>
+
+<div class="question">
+  <p>23. ¿Qué etiqueta HTML se usa para insertar una línea horizontal?</p>
+  <label><input type="radio" name="q23" value="1"> &lt;hr&gt;</label><br>
+  <label><input type="radio" name="q23" value="0"> &lt;line&gt;</label><br>
+  <label><input type="radio" name="q23" value="0"> &lt;horizontal&gt;</label><br>
+  <label><input type="radio" name="q23" value="0"> &lt;break&gt;</label>
+</div>
+
+<div class="question">
+  <p>24. ¿Qué etiqueta HTML se usa para insertar un salto de línea?</p>
+  <label><input type="radio" name="q24" value="1"> &lt;br&gt;</label><br>
+  <label><input type="radio" name="q24" value="0"> &lt;break&gt;</label><br>
+  <label><input type="radio" name="q24" value="0"> &lt;lb&gt;</label><br>
+  <label><input type="radio" name="q24" value="0"> &lt;newline&gt;</label>
+</div>
+
+<div class="question">
+  <p>25. ¿Qué etiqueta HTML se usa para definir un párrafo?</p>
+  <label><input type="radio" name="q25" value="1"> &lt;p&gt;</label><br>
+  <label><input type="radio" name="q25" value="0"> &lt;paragraph&gt;</label><br>
+  <label><input type="radio" name="q25" value="0"> &lt;text&gt;</label><br>
+  <label><input type="radio" name="q25" value="0"> &lt;body&gt;</label>
+</div>
+
+<div class="question">
+  <p>26. ¿Qué propiedad CSS se usa para aplicar sombra a una caja?</p>
+  <label><input type="radio" name="q26" value="1"> box-shadow</label><br>
+  <label><input type="radio" name="q26" value="0"> text-shadow</label><br>
+  <label><input type="radio" name="q26" value="0"> shadow-box</label><br>
+  <label><input type="radio" name="q26" value="0"> border-shadow</label>
+</div>
+
+<div class="question">
+  <p>27. ¿Qué propiedad CSS permite aplicar transparencia solo al fondo?</p>
+  <label><input type="radio" name="q27" value="1"> background-color: rgba()</label><br>
+  <label><input type="radio" name="q27" value="0"> opacity</label><br>
+  <label><input type="radio" name="q27" value="0"> visibility</label><br>
+  <label><input type="radio" name="q27" value="0"> background-opacity</label>
+</div>
+
+<div class="question">
+  <p>28. ¿Qué etiqueta HTML se usa para crear una tabla?</p>
+  <label><input type="radio" name="q28" value="1"> &lt;table&gt;</label><br>
+  <label><input type="radio" name="q28" value="0"> &lt;tab&gt;</label><br>
+  <label><input type="radio" name="q28" value="0"> &lt;grid&gt;</label><br>
+  <label><input type="radio" name="q28" value="0"> &lt;layout&gt;</label>
+</div>
+
+<div class="question">
+  <p>29. ¿Qué propiedad CSS se usa para definir el tipo de letra?</p>
+  <label><input type="radio" name="q29" value="1"> font-family</label><br>
+  <label><input type="radio" name="q29" value="0"> font-type</label><br>
+  <label><input type="radio" name="q29" value="0"> text-font</label><br>
+  <label><input type="radio" name="q29" value="0"> typeface</label>
+</div>
+
+<div class="question">
+  <p>30. ¿Qué propiedad CSS se usa para definir el tamaño del texto?</p>
+  <label><input type="radio" name="q30" value="1"> font-size</label><br>
+  <label><input type="radio" name="q30" value="0"> text-size</label><br>
+  <label><input type="radio" name="q30" value="0"> size-font</label><br>
+  <label><input type="radio" name="q30" value="0"> font-height</label>
+</div>
+
+<div class="question">
+  <p>31. ¿Qué etiqueta HTML se usa para definir una lista desordenada?</p>
+  <label><input type="radio" name="q31" value="1"> &lt;ul&gt;</label><br>
+  <label><input type="radio" name="q31" value="0"> &lt;ol&gt;</label><br>
+  <label><input type="radio" name="q31" value="0"> &lt;li&gt;</label><br>
+  <label><input type="radio" name="q31" value="0"> &lt;list&gt;</label>
+</div>
+
+<div class="question">
+  <p>32. ¿Qué etiqueta HTML se usa para definir un elemento de lista?</p>
+  <label><input type="radio" name="q32" value="1"> &lt;li&gt;</label><br>
+  <label><input type="radio" name="q32" value="0"> &lt;ul&gt;</label><br>
+  <label><input type="radio" name="q32" value="0"> &lt;ol&gt;</label><br>
+  <label><input type="radio" name="q32" value="0"> &lt;item&gt;</label>
+</div>
+
+<div class="question">
+  <p>33. ¿Qué propiedad CSS se usa para aplicar relleno interno?</p>
+  <label><input type="radio" name="q33" value="1"> padding</label><br>
+  <label><input type="radio" name="q33" value="0"> margin</label><br>
+  <label><input type="radio" name="q33" value="0"> border</label><br>
+  <label><input type="radio" name="q33" value="0"> spacing</label>
+</div>
+
+<div class="question">
+  <p>34. ¿Qué propiedad CSS se usa para aplicar margen externo?</p>
+  <label><input type="radio" name="q34" value="1"> margin</label><br>
+  <label><input type="radio" name="q34" value="0"> padding</label><br>
+  <label><input type="radio" name="q34" value="0"> border</label><br>
+  <label><input type="radio" name="q34" value="0"> spacing</label>
+</div>
+
+<div class="question">
+  <p>35. ¿Qué propiedad CSS se usa para definir el ancho de un elemento?</p>
+  <label><input type="radio" name="q35" value="1"> width</label><br>
+  <label><input type="radio" name="q35" value="0"> size</label><br>
+  <label><input type="radio" name="q35" value="0"> length</label><br>
+  <label><input type="radio" name="q35" value="0"> dimension</label>
+</div>
+
+<div class="question">
+  <p>36. ¿Qué propiedad CSS se usa para definir la altura de un elemento?</p>
+  <label><input type="radio" name="q36" value="1"> height</label><br>
+  <label><input type="radio" name="q36" value="0"> length</label><br>
+  <label><input type="radio" name="q36" value="0"> size</label><br>
+  <label><input type="radio" name="q36" value="0"> dimension</label>
+</div>
+
+<div class="question">
+  <p>37. ¿Qué etiqueta HTML se usa para insertar un archivo de video?</p>
+  <label><input type="radio" name="q37" value="1"> &lt;video&gt;</label><br>
+  <label><input type="radio" name="q37" value="0"> &lt;media&gt;</label><br>
+  <label><input type="radio" name="q37" value="0"> &lt;movie&gt;</label><br>
+  <label><input type="radio" name="q37" value="0"> &lt;vid&gt;</label>
+</div>
+
+<div class="question">
+  <p>38. ¿Qué atributo se usa para que un campo de formulario sea obligatorio?</p>
+  <label><input type="radio" name="q38" value="1"> required</label><br>
+  <label><input type="radio" name="q38" value="0"> mandatory</label><br>
+  <label><input type="radio" name="q38" value="0"> must</label><br>
+  <label><input type="radio" name="q38" value="0"> validate</label>
+</div>
+
+<div class="question">
+  <p>39. ¿Qué etiqueta HTML se usa para insertar un archivo de audio?</p>
+  <label><input type="radio" name="q39" value="1"> &lt;audio&gt;</label><br>
+  <label><input type="radio" name="q39" value="0"> &lt;sound&gt;</label><br>
+  <label><input type="radio" name="q39" value="0"> &lt;music&gt;</label><br>
+  <label><input type="radio" name="q39" value="0"> &lt;media&gt;</label>
+</div>
+
+<div class="question">
+  <p>40. ¿Qué atributo HTML se usa para especificar el texto alternativo de una imagen?</p>
+  <label><input type="radio" name="q40" value="1"> alt</label><br>
+  <label><input type="radio" name="q40" value="0"> title</label><br>
+  <label><input type="radio" name="q40" value="0"> description</label><br>
+  <label><input type="radio" name="q40" value="0"> caption</label>
+</div>
+
+<div class="question">
+  <p>41. ¿Qué propiedad CSS se usa para cambiar el tipo de letra?</p>
+  <label><input type="radio" name="q41" value="1"> font-family</label><br>
+  <label><input type="radio" name="q41" value="0"> font-type</label><br>
+  <label><input type="radio" name="q41" value="0"> text-font</label><br>
+  <label><input type="radio" name="q41" value="0"> typeface</label>
+</div>
+
+<div class="question">
+  <p>42. ¿Qué propiedad CSS se usa para centrar un texto?</p>
+  <label><input type="radio" name="q42" value="1"> text-align: center</label><br>
+  <label><input type="radio" name="q42" value="0"> align: center</label><br>
+  <label><input type="radio" name="q42" value="0"> center-text</label><br>
+  <label><input type="radio" name="q42" value="0"> text-center</label>
+</div>
+
+<div class="question">
+  <p>43. ¿Qué etiqueta HTML se usa para insertar una línea divisoria horizontal?</p>
+  <label><input type="radio" name="q43" value="1"> &lt;hr&gt;</label><br>
+  <label><input type="radio" name="q43" value="0"> &lt;line&gt;</label><br>
+  <label><input type="radio" name="q43" value="0"> &lt;div&gt;</label><br>
+  <label><input type="radio" name="q43" value="0"> &lt;break&gt;</label>
+</div>
+
+<div class="question">
+  <p>44. ¿Qué propiedad CSS se usa para definir el color de fondo?</p>
+  <label><input type="radio" name="q44" value="1"> background-color</label><br>
+  <label><input type="radio" name="q44" value="0"> color-background</label><br>
+  <label><input type="radio" name="q44" value="0"> bg-color</label><br>
+  <label><input type="radio" name="q44" value="0"> background</label>
+</div>
+
+<div class="question">
+  <p>45. ¿Qué etiqueta HTML se usa para insertar un salto de línea?</p>
+  <label><input type="radio" name="q45" value="1"> &lt;br&gt;</label><br>
+  <label><input type="radio" name="q45" value="0"> &lt;break&gt;</label><br>
+  <label><input type="radio" name="q45" value="0"> &lt;lb&gt;</label><br>
+  <label><input type="radio" name="q45" value="0"> &lt;newline&gt;</label>
+</div>
+
+<div class="question">
+  <p>46. ¿Qué atributo HTML se usa para especificar el destino de un enlace?</p>
+  <label><input type="radio" name="q46" value="1"> target</label><br>
+  <label><input type="radio" name="q46" value="0"> href</label><br>
+  <label><input type="radio" name="q46" value="0"> action</label><br>
+  <label><input type="radio" name="q46" value="0"> destination</label>
+</div>
+
+<div class="question">
+  <p>47. ¿Qué etiqueta HTML se usa para definir una sección de navegación?</p>
+  <label><input type="radio" name="q47" value="1"> &lt;nav&gt;</label><br>
+  <label><input type="radio" name="q47" value="0"> &lt;menu&gt;</label><br>
+  <label><input type="radio" name="q47" value="0"> &lt;navigation&gt;</label><br>
+  <label><input type="radio" name="q47" value="0"> &lt;section&gt;</label>
+</div>
+
+<div class="question">
+  <p>48. ¿Qué etiqueta HTML se usa para definir el contenido principal de una página?</p>
+  <label><input type="radio" name="q48" value="1"> &lt;main&gt;</label><br>
+  <label><input type="radio" name="q48" value="0"> &lt;body&gt;</label><br>
+  <label><input type="radio" name="q48" value="0"> &lt;content&gt;</label><br>
+  <label><input type="radio" name="q48" value="0"> &lt;section&gt;</label>
+</div>
+
+<div class="question">
+  <p>49. ¿Qué etiqueta HTML se usa para definir una cabecera de documento o sección?</p>
+  <label><input type="radio" name="q49" value="1"> &lt;header&gt;</label><br>
+  <label><input type="radio" name="q49" value="0"> &lt;head&gt;</label><br>
+  <label><input type="radio" name="q49" value="0"> &lt;top&gt;</label><br>
+  <label><input type="radio" name="q49" value="0"> &lt;title&gt;</label>
+</div>
+
+<div class="question">
+  <p>50. ¿Qué etiqueta HTML se usa para definir el pie de una sección o documento?</p>
+  <label><input type="radio" name="q50" value="1"> &lt;footer&gt;</label><br>
+  <label><input type="radio" name="q50" value="0"> &lt;bottom&gt;</label><br>
+  <label><input type="radio" name="q50" value="0"> &lt;end&gt;</label><br>
+  <label><
+
+<div class="question">
+  <p>51. ¿Qué propiedad CSS se usa para definir el espaciado entre letras?</p>
+  <label><input type="radio" name="q51" value="1"> letter-spacing</label><br>
+  <label><input type="radio" name="q51" value="0"> word-spacing</label><br>
+  <label><input type="radio" name="q51" value="0"> text-indent</label><br>
+  <label><input type="radio" name="q51" value="0"> spacing</label>
+</div>
+
+<div class="question">
+  <p>52. ¿Qué propiedad CSS se usa para definir el espaciado entre palabras?</p>
+  <label><input type="radio" name="q52" value="1"> word-spacing</label><br>
+  <label><input type="radio" name="q52" value="0"> letter-spacing</label><br>
+  <label><input type="radio" name="q52" value="0"> text-align</label><br>
+  <label><input type="radio" name="q52" value="0"> spacing</label>
+</div>
+
+<div class="question">
+  <p>53. ¿Qué propiedad CSS se usa para alinear el texto?</p>
+  <label><input type="radio" name="q53" value="1"> text-align</label><br>
+  <label><input type="radio" name="q53" value="0"> align-text</label><br>
+  <label><input type="radio" name="q53" value="0"> text-position</label><br>
+  <label><input type="radio" name="q53" value="0"> font-align</label>
+</div>
+
+<div class="question">
+  <p>54. ¿Qué propiedad CSS se usa para aplicar relleno interno?</p>
+  <label><input type="radio" name="q54" value="1"> padding</label><br>
+  <label><input type="radio" name="q54" value="0"> margin</label><br>
+  <label><input type="radio" name="q54" value="0"> border</label><br>
+  <label><input type="radio" name="q54" value="0"> spacing</label>
+</div>
+
+<div class="question">
+  <p>55. ¿Qué propiedad CSS se usa para aplicar margen externo?</p>
+  <label><input type="radio" name="q55" value="1"> margin</label><br>
+  <label><input type="radio" name="q55" value="0"> padding</label><br>
+  <label><input type="radio" name="q55" value="0"> border</label><br>
+  <label><input type="radio" name="q55" value="0"> spacing</label>
+</div>
+
+<div class="question">
+  <p>56. ¿Qué propiedad CSS se usa para ocultar un elemento completamente?</p>
+  <label><input type="radio" name="q56" value="1"> display: none</label><br>
+  <label><input type="radio" name="q56" value="0"> visibility: hidden</label><br>
+  <label><input type="radio" name="q56" value="0"> opacity: 0</label><br>
+  <label><input type="radio" name="q56" value="0"> hidden: true</label>
+</div>
+
+<div class="question">
+  <p>57. ¿Qué propiedad CSS se usa para cambiar el color de fondo?</p>
+  <label><input type="radio" name="q57" value="1"> background-color</label><br>
+  <label><input type="radio" name="q57" value="0"> color</label><br>
+  <label><input type="radio" name="q57" value="0"> bg-color</label><br>
+  <label><input type="radio" name="q57" value="0"> background</label>
+</div>
+
+<div class="question">
+  <p>58. ¿Qué propiedad CSS se usa para cambiar el color del texto?</p>
+  <label><input type="radio" name="q58" value="1"> color</label><br>
+  <label><input type="radio" name="q58" value="0"> text-color</label><br>
+  <label><input type="radio" name="q58" value="0"> font-color</label><br>
+  <label><input type="radio" name="q58" value="0"> foreground-color</label>
+</div>
+
+<div class="question">
+  <p>59. ¿Qué propiedad CSS se usa para definir el tipo de fuente?</p>
+  <label><input type="radio" name="q59" value="1"> font-family</label><br>
+  <label><input type="radio" name="q59" value="0"> font-type</label><br>
+  <label><input type="radio" name="q59" value="0"> text-font</label><br>
+  <label><input type="radio" name="q59" value="0"> typeface</label>
+</div>
+
+<div class="question">
+  <p>60. ¿Qué propiedad CSS se usa para definir el tamaño de la fuente?</p>
+  <label><input type="radio" name="q60" value="1"> font-size</label><br>
+  <label><input type="radio" name="q60" value="0"> text-size</label><br>
+  <label><input type="radio" name="q60" value="0"> size-font</label><br>
+  <label><input type="radio" name="q60" value="0"> font-height</label>
+</div>
+
+<div class="question">
+  <p>61. ¿Qué propiedad CSS se usa para aplicar negrita?</p>
+  <label><input type="radio" name="q61" value="1"> font-weight: bold</label><br>
+  <label><input type="radio" name="q61" value="0"> text-bold</label><br>
+  <label><input type="radio" name="q61" value="0"> bold-font</label><br>
+  <label><input type="radio" name="q61" value="0"> font-bold</label>
+</div>
+
+<div class="question">
+  <p>62. ¿Qué propiedad CSS se usa para aplicar cursiva?</p>
+  <label><input type="radio" name="q62" value="1"> font-style: italic</label><br>
+  <label><input type="radio" name="q62" value="0"> text-italic</label><br>
+  <label><input type="radio" name="q62" value="0"> italic-font</label><br>
+  <label><input type="radio" name="q62" value="0"> font-italic</label>
+</div>
+
+<div class="question">
+  <p>63. ¿Qué propiedad CSS se usa para subrayar texto?</p>
+  <label><input type="radio" name="q63" value="1"> text-decoration: underline</label><br>
+  <label><input type="radio" name="q63" value="0"> font-underline</label><br>
+  <label><input type="radio" name="q63" value="0"> underline-text</label><br>
+  <label><input type="radio" name="q63" value="0"> text-underline</label>
+</div>
+
+<div class="question">
+  <p>64. ¿Qué propiedad CSS se usa para tachar texto?</p>
+  <label><input type="radio" name="q64" value="1"> text-decoration: line-through</label><br>
+  <label><input type="radio" name="q64" value="0"> text-strike</label><br>
+  <label><input type="radio" name="q64" value="0"> strike-through</label><br>
+  <label><input type="radio" name="q64" value="0"> font-strike</label>
+</div>
+
+<div class="question">
+  <p>65. ¿Qué propiedad CSS se usa para convertir texto a mayúsculas?</p>
+  <label><input type="radio" name="q65" value="1"> text-transform: uppercase</label><br>
+  <label><input type="radio" name="q65" value="0"> font-uppercase</label><br>
+  <label><input type="radio" name="q65" value="0"> text-uppercase</label><br>
+  <label><input type="radio" name="q65" value="0"> transform-text</label>
+</div>
+
+<div class="question">
+  <p>66. ¿Qué propiedad CSS se usa para convertir texto a minúsculas?</p>
+  <label><input type="radio" name="q66" value="1"> text-transform: lowercase</label><br>
+  <label><input type="radio" name="q66" value="0"> font-lowercase</label><br>
+  <label><input type="radio" name="q66" value="0"> text-lower</label><br>
+  <label><input type="radio" name="q66" value="0"> transform-text</label>
+</div>
+
+<div class="question">
+  <p>67. ¿Qué propiedad CSS se usa para capitalizar la primera letra de cada palabra?</p>
+  <label><input type="radio" name="q67" value="1"> text-transform: capitalize</label><br>
+  <label><input type="radio" name="q67" value="0"> font-capitalize</label><br>
+  <label><input type="radio" name="q67" value="0"> text-capital</label><br>
+  <label><input type="radio" name="q67" value="0"> capitalize-text</label>
+</div>
+
+<div class="question">
+  <p>68. ¿Qué propiedad CSS se usa para controlar el espacio entre líneas de texto?</p>
+  <label><input type="radio" name="q68" value="1"> line-height</label><br>
+  <label><input type="radio" name="q68" value="0"> text-spacing</label><br>
+  <label><input type="radio" name="q68" value="0"> spacing-line</label><br>
+  <label><input type="radio" name="q68" value="0"> line-spacing</label>
+</div>
+
+<div class="question">
+  <p>69. ¿Qué propiedad CSS se usa para establecer el estilo de la lista?</p>
+  <label><input type="radio" name="q69" value="1"> list-style</label><br>
+  <label><input type="radio" name="q69" value="0"> style-list</label><br>
+  <label><input type="radio" name="q69" value="0"> list-type</label><br>
+  <label><input type="radio" name="q69" value="0"> bullet-style</label>
+</div>
+
+<div class="question">
+  <p>70. ¿Qué propiedad CSS se usa para establecer la posición de un elemento?</p>
+  <label><input type="radio" name="q70" value="1"> position</label><br>
+  <label><input type="radio" name="q70" value="0"> location</label><br>
+  <label><input type="radio" name="q70" value="0"> place</label><br>
+  <label><input type="radio" name="q70" value="0"> align</label>
+</div>
+
+<div class="question">
+  <p>71. ¿Qué valor de la propiedad position coloca el elemento en relación al documento?</p>
+  <label><input type="radio" name="q71" value="1"> absolute</label><br>
+  <label><input type="radio" name="q71" value="0"> relative</label><br>
+  <label><input type="radio" name="q71" value="0"> fixed</label><br>
+  <label><input type="radio" name="q71" value="0"> static</label>
+</div>
+
+<div class="question">
+  <p>72. ¿Qué valor de la propiedad position mantiene el elemento fijo en la pantalla?</p>
+  <label><input type="radio" name="q72" value="1"> fixed</label><br>
+  <label><input type="radio" name="q72" value="0"> absolute</label><br>
+  <label><input type="radio" name="q72" value="0"> relative</label><br>
+  <label><input type="radio" name="q72" value="0"> static</label>
+</div>
+
+<div class="question">
+  <p>73. ¿Qué valor de la propiedad position coloca el elemento en relación a su contenedor?</p>
+  <label><input type="radio" name="q73" value="1"> relative</label><br>
+  <label><input type="radio" name="q73" value="0"> absolute</label><br>
+  <label><input type="radio" name="q73" value="0"> fixed</label><br>
+  <label><input type="radio" name="q73" value="0"> static</label>
+</div>
+
+<div class="question">
+  <p>74. ¿Qué valor de la propiedad position es el valor por defecto?</p>
+  <label><input type="radio" name="q74" value="1"> static</label><br>
+  <label><input type="radio" name="q74" value="0"> relative</label><br>
+  <label><input type="radio" name="q74" value="0"> absolute</label><br>
+  <label><input type="radio" name="q74" value="0"> fixed</label>
+</div>
+
+<div class="question">
+  <p>75. ¿Qué propiedad CSS se usa para controlar el orden de apilamiento de elementos?</p>
+  <label><input type="radio" name="q75" value="1"> z-index</label><br>
+  <label><input type="radio" name="q75" value="0"> stack-order</label><br>
+  <label><input type="radio" name="q75" value="0"> layer-index</label><br>
+  <label><input type="radio" name="q75" value="0"> position-order</label>
+</div>
+
+<div class="question">
+  <p>76. ¿Qué propiedad CSS se usa para aplicar sombra a un texto?</p>
+  <label><input type="radio" name="q76" value="1"> text-shadow</label><br>
+  <label><input type="radio" name="q76" value="0"> box-shadow</label><br>
+  <label><input type="radio" name="q76" value="0"> font-shadow</label><br>
+  <label><input type="radio" name="q76" value="0"> shadow-text</label>
+</div>
+
+<div class="question">
+  <p>77. ¿Qué propiedad CSS se usa para aplicar sombra a una caja?</p>
+  <label><input type="radio" name="q77" value="1"> box-shadow</label><br>
+  <label><input type="radio" name="q77" value="0"> shadow-box</label><br>
+  <label><input type="radio" name="q77" value="0"> border-shadow</label><br>
+  <label><input type="radio" name="q77" value="0"> text-shadow</label>
+</div>
+
+<div class="question">
+  <p>78. ¿Qué propiedad CSS permite aplicar transparencia a todo un elemento?</p>
+  <label><input type="radio" name="q78" value="1"> opacity</label><br>
+  <label><input type="radio" name="q78" value="0"> rgba</label><br>
+  <label><input type="radio" name="q78" value="0"> alpha</label><br>
+  <label><input type="radio" name="q78" value="0"> visibility</label>
+</div>
+
+<div class="question">
+  <p>79. ¿Qué propiedad CSS permite aplicar transparencia solo al fondo?</p>
+  <label><input type="radio" name="q79" value="1"> background-color: rgba()</label><br>
+  <label><input type="radio" name="q79" value="0"> opacity</label><br>
+  <label><input type="radio" name="q79" value="0"> background-opacity</label><br>
+  <label><input type="radio" name="q79" value="0"> alpha</label>
+</div>
+
+<div class="question">
+  <p>80. ¿Qué propiedad CSS permite definir el tamaño de una imagen de fondo?</p>
+  <label><input type="radio" name="q80" value="1"> background-size</label><br>
+  <label><input type="radio" name="q80" value="0"> background-scale</label><br>
+  <label><input type="radio" name="q80" value="0"> image-size</label><br>
+  <label><input type="radio" name="q80" value="0"> size-background</label>
+</div>
+
+<div class="question">
+  <p>81. ¿Qué valor de background-size ajusta la imagen para cubrir todo el contenedor?</p>
+  <label><input type="radio" name="q81" value="1"> cover</label><br>
+  <label><input type="radio" name="q81" value="0"> contain</label><br>
+  <label><input type="radio" name="q81" value="0"> full</label><br>
+  <label><input type="radio" name="q81" value="0"> stretch</label>
+</div>
+
+<div class="question">
+  <p>82. ¿Qué valor de background-size ajusta la imagen para que se vea completa?</p>
+  <label><input type="radio" name="q82" value="1"> contain</label><br>
+  <label><input type="radio" name="q82" value="0"> cover</label><br>
+  <label><input type="radio" name="q82" value="0"> full</label><br>
+  <label><input type="radio" name="q82" value="0"> stretch</label>
+</div>
+
+<div class="question">
+  <p>83. ¿Qué propiedad CSS permite aplicar múltiples imágenes de fondo?</p>
+  <label><input type="radio" name="q83" value="1"> background</label><br>
+  <label><input type="radio" name="q83" value="0"> background-image</label><br>
+  <label><input type="radio" name="q83" value="0"> background-multi</label><br>
+  <label><input type="radio" name="q83" value="0"> multi-background</label>
+</div>
+
+<div class="question">
+  <p>84. ¿Qué propiedad CSS permite cortar texto que se desborda?</p>
+  <label><input type="radio" name="q84" value="1"> text-overflow</label><br>
+  <label><input type="radio" name="q84" value="0"> overflow-text</label><br>
+  <label><input type="radio" name="q84" value="0"> text-cut</label><br>
+  <label><input type="radio" name="q84" value="0"> clip-text</label>
+</div>
+
+<div class="question">
+  <p>85. ¿Qué valor de text-overflow muestra puntos suspensivos?</p>
+  <label><input type="radio" name="q85" value="1"> ellipsis</label><br>
+  <label><input type="radio" name="q85" value="0"> clip</label><br>
+  <label><input type="radio" name="q85" value="0"> dots</label><br>
+  <label><input type="radio" name="q85" value="0"> fade</label>
+</div>
+
+<div class="question">
+  <p>86. ¿Qué propiedad CSS permite usar fuentes personalizadas?</p>
+  <label><input type="radio" name="q86" value="1">@font-face</label><br>
+  <label><input type="radio" name="q86" value="0"> font-family</label><br>
+  <label><input type="radio" name="q86" value="0"> font-src</label><br>
+  <label><input type="radio" name="q86" value="0"> font-load</label>
+</div>
+
+<div class="question">
+  <p>87. ¿Qué propiedad CSS permite aplicar un degradado lineal?</p>
+  <label><input type="radio" name="q87" value="1"> linear-gradient</label><br>
+  <label><input type="radio" name="q87" value="0"> gradient-line</label><br>
+  <label><input type="radio" name="q87" value="0"> background-gradient</label><br>
+  <label><input type="radio" name="q87" value="0"> gradient</label>
+</div>
+
+<div class="question">
+  <p>88. ¿Qué propiedad CSS permite dividir contenido en columnas?</p>
+  <label><input type="radio" name="q88" value="1"> column-count</label><br>
+  <label><input type="radio" name="q88" value="0"> columns</label><br>
+  <label><input type="radio" name="q88" value="0"> column-split</label><br>
+  <label><input type="radio" name="q88" value="0"> split-columns</label>
+</div>
+
+<div class="question">
+  <p>89. ¿Qué propiedad CSS permite definir el ancho de las columnas?</p>
+  <label><input type="radio" name="q89" value="1"> column-width</label><br>
+  <label><input type="radio" name="q89" value="0"> column-size</label><br>
+  <label><input type="radio" name="q89" value="0"> width-column</label><br>
+  <label><input type="radio" name="q89" value="0"> column-scale</label>
+</div>
+
+<div class="question">
+  <p>90. ¿Qué propiedad CSS permite definir el espacio entre columnas?</p>
+  <label><input type="radio" name="q90" value="1"> column-gap</label><br>
+  <label><input type="radio" name="q90" value="0"> column-space</label><br>
+  <label><input type="radio" name="q90" value="0"> gap-column</label><br>
+  <label><input type="radio" name="q90" value="0"> spacing-column</label>
+</div>
+
+<div class="question">
+  <p>91. ¿Qué propiedad CSS permite definir el número de columnas en un diseño multicolumna?</p>
+  <label><input type="radio" name="q91" value="1"> column-count</label><br>
+  <label><input type="radio" name="q91" value="0"> column-number</label><br>
+  <label><input type="radio" name="q91" value="0"> columns</label><br>
+  <label><input type="radio" name="q91" value="0"> column-set</label>
+</div>
+
+<div class="question">
+  <p>92. ¿Qué propiedad CSS permite definir el estilo de las columnas?</p>
+  <label><input type="radio" name="q92" value="1"> column-rule-style</label><br>
+  <label><input type="radio" name="q92" value="0"> column-style</label><br>
+  <label><input type="radio" name="q92" value="0"> rule-style</label><br>
+  <label><input type="radio" name="q92" value="0"> column-border-style</label>
+</div>
+
+<div class="question">
+  <p>93. ¿Qué propiedad CSS permite definir el color entre columnas?</p>
+  <label><input type="radio" name="q93" value="1"> column-rule-color</label><br>
+  <label><input type="radio" name="q93" value="0"> column-color</label><br>
+  <label><input type="radio" name="q93" value="0"> rule-color</label><br>
+  <label><input type="radio" name="q93" value="0"> column-border-color</label>
+</div>
+
+<div class="question">
+  <p>94. ¿Qué propiedad CSS permite definir el grosor entre columnas?</p>
+  <label><input type="radio" name="q94" value="1"> column-rule-width</label><br>
+  <label><input type="radio" name="q94" value="0"> column-width</label><br>
+  <label><input type="radio" name="q94" value="0"> rule-width</label><br>
+  <label><input type="radio" name="q94" value="0"> column-border-width</label>
+</div>
+
+<div class="question">
+  <p>95. ¿Qué propiedad CSS permite definir el espacio entre columnas?</p>
+  <label><input type="radio" name="q95" value="1"> column-gap</label><br>
+  <label><input type="radio" name="q95" value="0"> column-space</label><br>
+  <label><input type="radio" name="q95" value="0"> gap-column</label><br>
+  <label><input type="radio" name="q95" value="0"> spacing-column</label>
+</div>
+
+<div class="question">
+  <p>96. ¿Qué propiedad CSS permite definir el número de columnas?</p>
+  <label><input type="radio" name="q96" value="1"> column-count</label><br>
+  <label><input type="radio" name="q96" value="0"> column-number</label><br>
+  <label><input type="radio" name="q96" value="0"> columns</label><br>
+  <label><input type="radio" name="q96" value="0"> column-set</label>
+</div>
+
+<div class="question">
+  <p>97. ¿Qué propiedad CSS permite definir el ancho de las columnas?</p>
+  <label><input type="radio" name="q97" value="1"> column-width</label><br>
+  <label><input type="radio" name="q97" value="0"> column-size</label><br>
+  <label><input type="radio" name="q97" value="0"> width-column</label><br>
+  <label><input type="radio" name="q97" value="0"> column-scale</label>
+</div>
+
+<div class="question">
+  <p>98. ¿Qué propiedad CSS permite definir el estilo de separación entre columnas?</p>
+  <label><input type="radio" name="q98" value="1"> column-rule</label><br>
+  <label><input type="radio" name="q98" value="0"> column-separator</label><br>
+  <label><input type="radio" name="q98" value="0"> column-divider</label><br>
+  <label><input type="radio" name="q98" value="0"> rule-column</label>
+</div>
+
+<div class="question">
+  <p>99. ¿Qué propiedad CSS permite definir el color de la regla entre columnas?</p>
+  <label><input type="radio" name="q99" value="1"> column-rule-color</label><br>
+  <label><input type="radio" name="q99" value="0"> rule-color</label><br>
+  <label><input type="radio" name="q99" value="0"> column-color</label><br>
+  <label><input type="radio" name="q99" value="0"> column-border-color</label>
+</div>
+
+<div class="question">
+  <p>100. ¿Qué propiedad CSS permite definir el grosor de la regla entre columnas?</p>
+  <label><input type="radio" name="q100" value="1"> column-rule-width</label><br>
+  <label><input type="radio" name="q100" value="0"> rule-width</label><br>
+  <label><input type="radio" name="q100" value="0"> column-width</label><br>
+  <label><input type="radio" name="q100" value="0"> column-border-width</label>
+</div>
+
+
+    <div style="text-align:center;">
+      <button type="button" onclick="checkAnswers()">Enviar respuestas</button>
+    </div>
+  </form>
+  <p id="result"></p>
+
+  <script>
+    function checkAnswers() {
+      const correctAnswers = [
+        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+      ];
+      let score = 0;
+      for (let i = 1; i <= correctAnswers.length; i++) {
+        const radios = document.getElementsByName('q' + i);
+        for (const radio of radios) {
+          if (radio.checked && parseInt(radio.value) === correctAnswers[i - 1]) {
+            score++;
+          }
+        }
+      }
+      const result = document.getElementById('result');
+      result.textContent = 'Tu puntuación: ' + score + ' de ' + correctAnswers.length;
+      result.style.color = score >= 80 ? 'green' : score >= 60 ? 'orange' : 'red';
+    }
+  </script>
+</body>
+</html>
+
+
+
