@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Test Interactivo Etiqueta HEAD</title>
+<style>
+  body { font-family: Arial; background-color: #f5f7fa; margin: 40px; color: #333; }
+  h1 { text-align: center; color: #2a6acb; }
+  .question { background: white; padding: 15px; margin: 15px 0; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+  button { background-color: #2a6acb; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-right: 10px; }
+  button:hover { background-color: #1e4f9c; }
+  #result { font-weight: bold; font-size: 1.2em; text-align: center; margin-top: 20px; }
+  .correct { color: green; font-weight: bold; }
+  .incorrect { color: red; font-weight: bold; }
+  #progressContainer { width: 100%; background: #ddd; border-radius: 10px; margin-top: 15px; }
+  #progressBar { width: 0%; height: 20px; background: #2a6acb; border-radius: 10px; transition: width 0.5s ease; }
+</style>
+</head>
+<body>
+<h1>Test Interactivo Etiqueta HEAD en HTML</h1>
+<div id="quiz"></div>
+<div style="text-align:center; margin-top:20px;">
+  <button onclick="checkAnswers()">Enviar respuestas</button>
+  <button onclick="resetQuiz()">Reiniciar</button>
+</div>
+<div id="progressContainer"><div id="progressBar"></div></div>
+<p id="result"></p>
+
+<script>
+const questions = [
+  {q: 'Que es la etiqueta head en HTML', options: ['Una etiqueta visible en la pagina','Un contenedor de metadatos','Una etiqueta para imagenes','Una etiqueta para formularios'], correct: 1},
+  {q: 'Donde se coloca la etiqueta head', options: ['Despues de body','Antes de html','Despues de html y antes de body','Al final del documento'], correct: 2},
+  {q: 'Que tipo de informacion contiene head', options: ['Contenido visible','Scripts y estilos','Metadatos como titulo y codificacion','Solo imagenes'], correct: 2},
+  {q: 'Que etiqueta define el titulo de la pagina', options: ['meta','title','link','script'], correct: 1},
+  {q: 'Donde aparece el contenido de la etiqueta title', options: ['En el cuerpo de la pagina','En la barra del navegador','En el pie de pagina','En el contenido visible'], correct: 1},
+  {q: 'Que etiqueta define la codificacion de caracteres', options: ['meta charset','meta name','link','base'], correct: 0},
+  {q: 'Que codificacion se recomienda usar en HTML', options: ['ASCII','ISO','UTF 8','ANSI'], correct: 2},
+  {q: 'Que etiqueta permite diseño responsivo en moviles', options: ['meta name viewport','meta charset','link','style'], correct: 0},
+  {q: 'Que atributo define el ancho del dispositivo en viewport', options: ['initial scale','width device','device width','width equals device'], correct: 2},
+  {q: 'Que etiqueta proporciona descripcion para buscadores', options: ['meta description','meta keywords','meta author','meta charset'], correct: 0},
+  {q: 'Que longitud se recomienda para la descripcion SEO', options: ['50 a 60 caracteres','100 a 120 caracteres','150 a 160 caracteres','200 a 250 caracteres'], correct: 2},
+  {q: 'Que etiqueta se usaba para palabras clave SEO', options: ['meta keywords','meta tags','meta search','meta name'], correct: 0},
+  {q: 'Que etiqueta define el autor del documento', options: ['meta creator','meta author','meta user','meta owner'], correct: 1},
+  {q: 'Que etiqueta vincula archivos CSS externos', options: ['script','style','link','meta'], correct: 2},
+  {q: 'Que atributo en link define la ruta del archivo', options: ['src','href','path','url'], correct: 1},
+  {q: 'Que etiqueta permite escribir estilos CSS internos', options: ['style','css','script','meta'], correct: 0},
+  {q: 'Que etiqueta permite incluir codigo JavaScript', options: ['script','js','code','link'], correct: 0},
+  {q: 'Que etiqueta define la url base del documento', options: ['base','link','meta','title'], correct: 0},
+  {q: 'Que etiqueta permite redireccionar automaticamente', options: ['meta refresh','meta redirect','script','link'], correct: 0},
+  {q: 'Que etiqueta se usa para compartir en redes sociales', options: ['meta og','meta social','meta share','meta media'], correct: 0}
+];
+
+const quizContainer = document.getElementById('quiz');
+const progressBar = document.getElementById('progressBar');
+
+questions.forEach((item, i) => {
+  const div = document.createElement('div');
+  div.classList.add('question');
+  div.innerHTML = 'Pregunta ' + (i + 1) + ': ' + item.q + '<br>' +
+    item.options.map((opt, j) => '<label><input type=radio name=q' + i + ' value=' + j + '> ' + opt + '</label><br>').join('');
+  quizContainer.appendChild(div);
+});
+
+function checkAnswers() {
+  let score = 0;
+  questions.forEach((item, i) => {
+    const selected = document.querySelector('input[name=q' + i + ']:checked');
+    const div = quizContainer.children[i];
+    const labels = div.querySelectorAll('label');
+    labels.forEach((l, idx) => {
+      l.classList.remove('correct','incorrect');
+      if (idx === item.correct) l.classList.add('correct');
+      if (selected && idx == selected.value && idx !== item.correct) l.classList.add('incorrect');
+    });
+    if (selected && parseInt(selected.value) === item.correct) score++;
+  });
+  const percent = (score / questions.length) * 100;
+  progressBar.style.width = percent + '%';
+
+  let message = '';
+  if (percent === 100) message = 'Excelente Has contestado todo correctamente';
+  else if (percent >= 80) message = 'Muy bien Tienes un gran dominio del tema';
+  else if (percent >= 50) message = 'Buen intento Sigue practicando';
+  else message = 'Puedes mejorar Repasa el contenido e intentalo otra vez';
+
+  document.getElementById('result').innerHTML = 'Resultado: ' + score + ' de ' + questions.length + '<br>' + message;
+}
+
+function resetQuiz() {
+  document.querySelectorAll('input[type=radio]').forEach(r => r.checked = false);
+  document.querySelectorAll('label').forEach(l => l.classList.remove('correct','incorrect'));
+  document.getElementById('result').textContent = '';
+  progressBar.style.width = '0%';
+}
+</script>
+</body>
+</html>

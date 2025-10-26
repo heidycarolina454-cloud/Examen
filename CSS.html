@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Test Interactivo CSS</title>
+<style>
+  body { font-family: Arial; background-color: #f5f7fa; margin: 40px; color: #333; }
+  h1 { text-align: center; color: #2a6acb; }
+  .question { background: white; padding: 15px; margin: 15px 0; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+  button { background-color: #2a6acb; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-right: 10px; }
+  button:hover { background-color: #1e4f9c; }
+  #result { font-weight: bold; font-size: 1.2em; text-align: center; margin-top: 20px; }
+  .correct { color: green; font-weight: bold; }
+  .incorrect { color: red; font-weight: bold; }
+  #progressContainer { width: 100%; background: #ddd; border-radius: 10px; margin-top: 15px; }
+  #progressBar { width: 0%; height: 20px; background: #2a6acb; border-radius: 10px; transition: width 0.5s ease; }
+</style>
+</head>
+<body>
+<h1>Test Interactivo CSS</h1>
+<div id="quiz"></div>
+<div style="text-align:center; margin-top:20px;">
+  <button onclick="checkAnswers()">Enviar respuestas</button>
+  <button onclick="resetQuiz()">Reiniciar</button>
+</div>
+<div id="progressContainer"><div id="progressBar"></div></div>
+<p id="result"></p>
+
+<script>
+const questions = [
+  {q: 'Que significa CSS', options: ['Creative Style Sheets','Cascading Style Sheets','Computer Style Syntax','Color Style System'], correct: 1},
+  {q: 'Para que se usa CSS', options: ['Crear estructuras HTML','Agregar interactividad','Dar estilo visual a las paginas web','Validar formularios'], correct: 2},
+  {q: 'Que selector aplica estilos a todos los elementos', options: ['.clase','#id','*','html'], correct: 2},
+  {q: 'Que simbolo se usa para seleccionar una clase', options: ['#','.','*','@'], correct: 1},
+  {q: 'Que simbolo se usa para seleccionar un ID', options: ['#','.','*','@'], correct: 0},
+  {q: 'Que selector aplica estilos a elementos dentro de otro', options: ['Selector descendiente','Selector universal','Selector de clase','Selector de ID'], correct: 0},
+  {q: 'Que operador selecciona elementos adyacentes', options: ['+','~','*','-'], correct: 0},
+  {q: 'Que unidad de medida es fija y no cambia con el contexto', options: ['em','%','px','rem'], correct: 2},
+  {q: 'Que unidad de medida es relativa al tamaño de fuente del padre', options: ['px','em','pt','cm'], correct: 1},
+  {q: 'Que propiedad define el color del texto', options: ['background color','border color','color','text color'], correct: 2},
+  {q: 'Que propiedad define el color de fondo', options: ['color','background color','border color','fill'], correct: 1},
+  {q: 'Que propiedad define el tipo de fuente', options: ['font family','font style','font weight','text align'], correct: 0},
+  {q: 'Que propiedad define el tamaño de fuente', options: ['font size','text size','size','font weight'], correct: 0},
+  {q: 'Que propiedad define el espaciado entre lineas', options: ['line height','letter spacing','word spacing','margin'], correct: 0},
+  {q: 'Que propiedad define el margen externo', options: ['padding','border','margin','spacing'], correct: 2},
+  {q: 'Que propiedad define el relleno interno', options: ['margin','padding','border','spacing'], correct: 1},
+  {q: 'Que propiedad define el borde de un elemento', options: ['border','outline','frame','edge'], correct: 0},
+  {q: 'Que tipo de posicionamiento mantiene el elemento fijo al hacer scroll', options: ['static','relative','absolute','fixed'], correct: 3},
+  {q: 'Que tipo de posicionamiento saca el elemento del flujo y lo posiciona respecto al contenedor padre', options: ['static','relative','absolute','fixed'], correct: 2},
+  {q: 'Que tipo de posicionamiento permite mover el elemento desde su posicion original', options: ['static','relative','absolute','fixed'], correct: 1}
+];
+
+const quizContainer = document.getElementById('quiz');
+const progressBar = document.getElementById('progressBar');
+
+questions.forEach((item, i) => {
+  const div = document.createElement('div');
+  div.classList.add('question');
+  div.innerHTML = 'Pregunta ' + (i + 1) + ': ' + item.q + '<br>' +
+    item.options.map((opt, j) => '<label><input type=radio name=q' + i + ' value=' + j + '> ' + opt + '</label><br>').join('');
+  quizContainer.appendChild(div);
+});
+
+function checkAnswers() {
+  let score = 0;
+  questions.forEach((item, i) => {
+    const selected = document.querySelector('input[name=q' + i + ']:checked');
+    const div = quizContainer.children[i];
+    const labels = div.querySelectorAll('label');
+    labels.forEach((l, idx) => {
+      l.classList.remove('correct','incorrect');
+      if (idx === item.correct) l.classList.add('correct');
+      if (selected && idx == selected.value && idx !== item.correct) l.classList.add('incorrect');
+    });
+    if (selected && parseInt(selected.value) === item.correct) score++;
+  });
+  const percent = (score / questions.length) * 100;
+  progressBar.style.width = percent + '%';
+
+  let message = '';
+  if (percent === 100) message = 'Excelente Has contestado todo correctamente';
+  else if (percent >= 80) message = 'Muy bien Tienes un gran dominio del tema';
+  else if (percent >= 50) message = 'Buen intento Sigue practicando';
+  else message = 'Puedes mejorar Repasa el contenido e intentalo otra vez';
+
+  document.getElementById('result').innerHTML = 'Resultado: ' + score + ' de ' + questions.length + '<br>' + message;
+}
+
+function resetQuiz() {
+  document.querySelectorAll('input[type=radio]').forEach(r => r.checked = false);
+  document.querySelectorAll('label').forEach(l => l.classList.remove('correct','incorrect'));
+  document.getElementById('result').textContent = '';
+  progressBar.style.width = '0%';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Test Interactivo Apache</title>
+<style>
+  body { font-family: Arial; background-color: #f5f7fa; margin: 40px; color: #333; }
+  h1 { text-align: center; color: #2a6acb; }
+  .question { background: white; padding: 15px; margin: 15px 0; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+  button { background-color: #2a6acb; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-right: 10px; }
+  button:hover { background-color: #1e4f9c; }
+  #result { font-weight: bold; font-size: 1.2em; text-align: center; margin-top: 20px; }
+  .correct { color: green; font-weight: bold; }
+  .incorrect { color: red; font-weight: bold; }
+  #progressContainer { width: 100%; background: #ddd; border-radius: 10px; margin-top: 15px; }
+  #progressBar { width: 0%; height: 20px; background: #2a6acb; border-radius: 10px; transition: width 0.5s ease; }
+</style>
+</head>
+<body>
+<h1>Test Interactivo Apache</h1>
+<div id="quiz"></div>
+<div style="text-align:center; margin-top:20px;">
+  <button onclick="checkAnswers()">Enviar respuestas</button>
+  <button onclick="resetQuiz()">Reiniciar</button>
+</div>
+<div id="progressContainer"><div id="progressBar"></div></div>
+<p id="result"></p>
+
+<script>
+const questions = [
+  {q: 'Que es Apache', options: ['Un lenguaje de programacion','Un sistema operativo','Un servidor web libre','Una base de datos'], correct: 2},
+  {q: 'En que año se lanzo Apache', options: ['1990','1995','2000','1985'], correct: 1},
+  {q: 'Quien gestiona Apache desde 1999', options: ['Linux Foundation','Apache Software Foundation','Mozilla Foundation','Open Source Initiative'], correct: 1},
+  {q: 'En que sistemas operativos funciona Apache', options: ['Solo Windows','Solo Linux','Solo Unix','Varios como Unix Linux Windows OS X'], correct: 3},
+  {q: 'Que lenguajes soporta Apache', options: ['Java y C','PHP Perl Tcl Python','HTML y CSS','Ruby y Go'], correct: 1},
+  {q: 'Que es Tomcat', options: ['Un navegador web','Un lenguaje de programacion','Un servidor de aplicaciones Java','Una base de datos'], correct: 2},
+  {q: 'Que permite Virtual Hosts', options: ['Crear bases de datos','Ejecutar scripts','Alojar multiples sitios web','Instalar modulos'], correct: 2},
+  {q: 'Como se configura Apache', options: ['Con interfaz grafica','Con comandos en consola','Editando archivos como httpd conf','Usando scripts en Python'], correct: 2},
+  {q: 'Como funciona una peticion en Apache', options: ['Apache genera la pagina','El navegador envia peticion y Apache responde','El usuario escribe codigo y Apache lo ejecuta','Apache consulta una base de datos'], correct: 1},
+  {q: 'Que es Apache Core', options: ['Un modulo de seguridad','El nucleo del servidor','Una base de datos','Un archivo de configuracion'], correct: 1},
+  {q: 'Que hace Listen 80', options: ['Define el nombre del servidor','Indica el puerto de escucha','Establece permisos','Configura el administrador'], correct: 1},
+  {q: 'Que son los modulos en Apache', options: ['Archivos de configuracion','Lenguajes de programacion','Componentes que extienden funciones','Bases de datos'], correct: 2},
+  {q: 'Que lenguaje se usa para paginas dinamicas', options: ['Java','PHP','HTML','C++'], correct: 1},
+  {q: 'Que archivo define Virtual Hosts', options: ['httpd conf','access conf','httpd vhosts conf','ssl conf'], correct: 2},
+  {q: 'Que archivo se edita en Windows para dominios locales', options: ['httpd conf','hosts','ssl conf','vhosts conf'], correct: 1},
+  {q: 'Que archivo configura HTTPS', options: ['httpd conf','httpd vhosts conf','httpd ssl conf','access conf'], correct: 2},
+  {q: 'Que directiva activa SSL', options: ['AllowOverride','SSLEngine on','Listen 443','ServerName'], correct: 1},
+  {q: 'Que es el archivo htaccess', options: ['Archivo de base de datos','Archivo de configuracion por directorio','Archivo de imagen','Archivo de log'], correct: 1},
+  {q: 'Que archivo permite el uso de htaccess', options: ['httpd ssl conf','httpd conf','access log','error log'], correct: 1},
+  {q: 'Que archivo registra errores en Apache', options: ['access log','error log','httpd conf','ssl conf'], correct: 1}
+];
+
+const quizContainer = document.getElementById('quiz');
+const progressBar = document.getElementById('progressBar');
+
+questions.forEach((item, i) => {
+  const div = document.createElement('div');
+  div.classList.add('question');
+  div.innerHTML = 'Pregunta ' + (i + 1) + ': ' + item.q + '<br>' +
+    item.options.map((opt, j) => '<label><input type=radio name=q' + i + ' value=' + j + '> ' + opt + '</label><br>').join('');
+  quizContainer.appendChild(div);
+});
+
+function checkAnswers() {
+  let score = 0;
+  questions.forEach((item, i) => {
+    const selected = document.querySelector('input[name=q' + i + ']:checked');
+    const div = quizContainer.children[i];
+    const labels = div.querySelectorAll('label');
+    labels.forEach((l, idx) => {
+      l.classList.remove('correct','incorrect');
+      if (idx === item.correct) l.classList.add('correct');
+      if (selected && idx == selected.value && idx !== item.correct) l.classList.add('incorrect');
+    });
+    if (selected && parseInt(selected.value) === item.correct) score++;
+  });
+  const percent = (score / questions.length) * 100;
+  progressBar.style.width = percent + '%';
+
+  let message = '';
+  if (percent === 100) message = 'Excelente Has contestado todo correctamente';
+  else if (percent >= 80) message = 'Muy bien Tienes un gran dominio del tema';
+  else if (percent >= 50) message = 'Buen intento Sigue practicando';
+  else message = 'Puedes mejorar Repasa el contenido e intentalo otra vez';
+
+  document.getElementById('result').innerHTML = 'Resultado: ' + score + ' de ' + questions.length + '<br>' + message;
+}
+
+function resetQuiz() {
+  document.querySelectorAll('input[type=radio]').forEach(r => r.checked = false);
+  document.querySelectorAll('label').forEach(l => l.classList.remove('correct','incorrect'));
+  document.getElementById('result').textContent = '';
+  progressBar.style.width = '0%';
+}
+</script>
+</body>
+</html>

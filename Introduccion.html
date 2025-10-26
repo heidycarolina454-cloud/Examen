@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Interactivo - Aplicaciones Web</title>
+<style>
+  body { font-family: Arial, sans-serif; background-color: #f5f7fa; margin: 40px; color: #333; }
+  h1 { text-align: center; color: #2a6acb; }
+  .question { background: white; padding: 15px; margin: 15px 0; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+  button { background-color: #2a6acb; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-right: 10px; }
+  button:hover { background-color: #1e4f9c; }
+  #result { font-weight: bold; font-size: 1.2em; text-align: center; margin-top: 20px; }
+  .correct { color: green; font-weight: bold; }
+  .incorrect { color: red; font-weight: bold; }
+  #progressContainer { width: 100%; background: #ddd; border-radius: 10px; margin-top: 15px; }
+  #progressBar { width: 0%; height: 20px; background: #2a6acb; border-radius: 10px; transition: width 0.5s ease; }
+</style>
+</head>
+<body>
+<h1>Test Interactivo - Aplicaciones Web</h1>
+<div id="quiz"></div>
+<div style="text-align:center; margin-top:20px;">
+  <button onclick="checkAnswers()">Enviar respuestas</button>
+  <button onclick="resetQuiz()">Reiniciar</button>
+</div>
+<div id="progressContainer"><div id="progressBar"></div></div>
+<p id="result"></p>
+
+<script>
+const questions = [
+  {q: '¿Qué es Internet?', options: ['Una sola red mundial controlada por un gobierno','Un conjunto de páginas web','Una red de redes que conecta millones de dispositivos','Un navegador web'], correct: 2},
+  {q: '¿Cuál fue el origen de Internet?', options: ['La creación de Google','ARPANET en 1969','El nacimiento de la Web en 1990','El desarrollo del correo electrónico'], correct: 1},
+  {q: '¿Qué es la Web?', options: ['Un lenguaje de programación','Un servicio dentro de Internet para acceder a páginas mediante navegadores','Un sistema operativo','Una red militar'], correct: 1},
+  {q: '¿Qué caracteriza a la Web 1.0?', options: ['Páginas estáticas y usuarios solo lectores','Contenido colaborativo','Redes sociales','Inteligencia artificial'], correct: 0},
+  {q: '¿Quién creó la World Wide Web?', options: ['Tim Berners-Lee','Bill Gates','Steve Jobs','Larry Page'], correct: 0},
+  {q: 'La Web 2.0 se distingue por:', options: ['La participación activa de los usuarios','Páginas estáticas','Uso exclusivo de texto','Falta de interacción'], correct: 0},
+  {q: '¿Qué significa el término “perpetual beta”?', options: ['Un sistema sin errores','Un software en mejora continua con participación de los usuarios','Una versión temporal','Una versión sin conexión'], correct: 1},
+  {q: '¿Qué tecnología permite actualizar una página sin recargar completamente?', options: ['HTML','CSS','AJAX','Java'], correct: 2},
+  {q: 'La Web 3.0 también se conoce como:', options: ['Web de lectura','Web semántica o inteligente','Web social','Web ubicua'], correct: 1},
+  {q: '¿Qué tecnología garantiza la seguridad y transparencia en la Web 3.0?', options: ['RSS','AJAX','Blockchain','IoT'], correct: 2},
+  {q: 'La Web 4.0 también se conoce como:', options: ['Web ubicua','Web descentralizada','Web de solo lectura','Web de texto'], correct: 0},
+  {q: '¿Qué tecnología está asociada a la Web 4.0?', options: ['Internet de las Cosas (IoT)','Blogs','RSS','HTML estático'], correct: 0},
+  {q: '¿Qué es una aplicación web?', options: ['Un software que se ejecuta en un servidor y se usa desde un navegador','Un programa que se instala en el ordenador','Un sistema operativo','Una página estática'], correct: 0},
+  {q: '¿Qué ventaja tienen las aplicaciones web?', options: ['No requieren instalación','Solo funcionan en un dispositivo','Consumen mucha memoria local','Solo funcionan sin Internet'], correct: 0},
+  {q: '¿Dónde se almacena la información de las aplicaciones web?', options: ['En servidores web o en la nube','En el disco duro del usuario','En un pendrive','En archivos locales'], correct: 0}
+];
+
+const quizContainer = document.getElementById('quiz');
+const progressBar = document.getElementById('progressBar');
+
+questions.forEach((item, i) => {
+  const div = document.createElement('div');
+  div.classList.add('question');
+  div.innerHTML = `<p><b>${i + 1}. ${item.q}</b></p>` +
+    item.options.map((opt, j) => `<label><input type='radio' name='q${i}' value='${j}'> ${opt}</label><br>`).join('');
+  quizContainer.appendChild(div);
+});
+
+function checkAnswers() {
+  let score = 0;
+  const answers = document.querySelectorAll('input[type=radio]:checked');
+  questions.forEach((item, i) => {
+    const selected = document.querySelector(`input[name='q${i}']:checked`);
+    const div = quizContainer.children[i];
+    const labels = div.querySelectorAll('label');
+    labels.forEach((l, idx) => {
+      l.classList.remove('correct','incorrect');
+      if (idx === item.correct) l.classList.add('correct');
+      if (selected && idx == selected.value && idx !== item.correct) l.classList.add('incorrect');
+    });
+    if (selected && parseInt(selected.value) === item.correct) score++;
+  });
+  const percent = (score / questions.length) * 100;
+  progressBar.style.width = percent + '%';
+  document.getElementById('result').textContent = `Resultado: ${score} / ${questions.length}`;
+}
+
+function resetQuiz() {
+  document.querySelectorAll('input[type=radio]').forEach(r => r.checked = false);
+  document.querySelectorAll('label').forEach(l => l.classList.remove('correct','incorrect'));
+  document.getElementById('result').textContent = '';
+  progressBar.style.width = '0%';
+}
+</script>
+</body>
+</html>

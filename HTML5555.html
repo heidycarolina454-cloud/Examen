@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Test Interactivo HTML5</title>
+<style>
+  body { font-family: Arial; background-color: #f5f7fa; margin: 40px; color: #333; }
+  h1 { text-align: center; color: #2a6acb; }
+  .question { background: white; padding: 15px; margin: 15px 0; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+  button { background-color: #2a6acb; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-right: 10px; }
+  button:hover { background-color: #1e4f9c; }
+  #result { font-weight: bold; font-size: 1.2em; text-align: center; margin-top: 20px; }
+  .correct { color: green; font-weight: bold; }
+  .incorrect { color: red; font-weight: bold; }
+  #progressContainer { width: 100%; background: #ddd; border-radius: 10px; margin-top: 15px; }
+  #progressBar { width: 0%; height: 20px; background: #2a6acb; border-radius: 10px; transition: width 0.5s ease; }
+</style>
+</head>
+<body>
+<h1>Test Interactivo HTML5</h1>
+<div id="quiz"></div>
+<div style="text-align:center; margin-top:20px;">
+  <button onclick="checkAnswers()">Enviar respuestas</button>
+  <button onclick="resetQuiz()">Reiniciar</button>
+</div>
+<div id="progressContainer"><div id="progressBar"></div></div>
+<p id="result"></p>
+
+<script>
+const questions = [
+  {q: 'Que significa HTML', options: ['HyperText Markup Language','HighText Machine Language','HyperTool Multi Language','Home Tool Markup Language'], correct: 0},
+  {q: 'Que version precedio a HTML5', options: ['HTML3','HTML4.01','XHTML2','HTML2.0'], correct: 1},
+  {q: 'Que grupo creo HTML5 en 2004', options: ['W3C','IETF','WHATWG','Mozilla'], correct: 2},
+  {q: 'Que año se publico el primer borrador oficial de HTML5', options: ['2004','2006','2008','2012'], correct: 2},
+  {q: 'Que tecnologia fue abandonada en favor de HTML5', options: ['CSS','XHTML2','JavaScript','SVG'], correct: 1},
+  {q: 'Que etiqueta permite graficos en HTML5', options: ['canvas','graphic','svg','draw'], correct: 0},
+  {q: 'Que etiqueta permite reproducir audio sin plugins', options: ['sound','audio','music','voice'], correct: 1},
+  {q: 'Que etiqueta permite reproducir video sin plugins', options: ['video','movie','media','clip'], correct: 0},
+  {q: 'Que organizacion define los estandares web', options: ['WHATWG','W3C','IETF','HTML5'], correct: 1},
+  {q: 'Que organizacion define los protocolos de internet', options: ['W3C','IETF','WHATWG','HTML'], correct: 1},
+  {q: 'Que principio de diseño busca compatibilidad con versiones anteriores', options: ['Seguridad','Utilidad','Compatibilidad','Accesibilidad'], correct: 2},
+  {q: 'Que principio busca que HTML5 funcione en todos los navegadores', options: ['Interoperabilidad','Acceso universal','Seguridad','Separacion de contenido'], correct: 0},
+  {q: 'Que principio busca que HTML5 funcione en cualquier dispositivo', options: ['Interoperabilidad','Acceso universal','Seguridad','Separacion de contenido'], correct: 1},
+  {q: 'Que iniciativa promueve accesibilidad web', options: ['WAI','ARIA','W3C','IETF'], correct: 0},
+  {q: 'Que atributo ya no es obligatorio en HTML5', options: ['type','href','src','alt'], correct: 0},
+  {q: 'Que tipo de contenido incluye video y audio', options: ['Flow','Embedded','Interactive','Metadata'], correct: 1},
+  {q: 'Que tipo de contenido incluye formularios y encabezados', options: ['Flow','Heading','Interactive','Sectioning'], correct: 0},
+  {q: 'Que tipo de contenido incluye botones y controles', options: ['Interactive','Flow','Metadata','Phrasing'], correct: 0},
+  {q: 'Que tipo de contenido incluye script y style', options: ['Metadata','Flow','Interactive','Embedded'], correct: 0},
+  {q: 'Que tipo de contenido incluye article y section', options: ['Sectioning','Flow','Heading','Phrasing'], correct: 0}
+];
+
+const quizContainer = document.getElementById('quiz');
+const progressBar = document.getElementById('progressBar');
+
+questions.forEach((item, i) => {
+  const div = document.createElement('div');
+  div.classList.add('question');
+  div.innerHTML = 'Pregunta ' + (i + 1) + ': ' + item.q + '<br>' +
+    item.options.map((opt, j) => '<label><input type=radio name=q' + i + ' value=' + j + '> ' + opt + '</label><br>').join('');
+  quizContainer.appendChild(div);
+});
+
+function checkAnswers() {
+  let score = 0;
+  questions.forEach((item, i) => {
+    const selected = document.querySelector('input[name=q' + i + ']:checked');
+    const div = quizContainer.children[i];
+    const labels = div.querySelectorAll('label');
+    labels.forEach((l, idx) => {
+      l.classList.remove('correct','incorrect');
+      if (idx === item.correct) l.classList.add('correct');
+      if (selected && idx == selected.value && idx !== item.correct) l.classList.add('incorrect');
+    });
+    if (selected && parseInt(selected.value) === item.correct) score++;
+  });
+  const percent = (score / questions.length) * 100;
+  progressBar.style.width = percent + '%';
+
+  let message = '';
+  if (percent === 100) message = 'Excelente Has contestado todo correctamente';
+  else if (percent >= 80) message = 'Muy bien Tienes un gran dominio del tema';
+  else if (percent >= 50) message = 'Buen intento Sigue practicando';
+  else message = 'Puedes mejorar Repasa el contenido e intentalo otra vez';
+
+  document.getElementById('result').innerHTML = 'Resultado: ' + score + ' de ' + questions.length + '<br>' + message;
+}
+
+function resetQuiz() {
+  document.querySelectorAll('input[type=radio]').forEach(r => r.checked = false);
+  document.querySelectorAll('label').forEach(l => l.classList.remove('correct','incorrect'));
+  document.getElementById('result').textContent = '';
+  progressBar.style.width = '0%';
+}
+</script>
+</body>
+</html>

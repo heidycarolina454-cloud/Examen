@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Test Interactivo HTML</title>
+<style>
+  body { font-family: Arial; background-color: #f5f7fa; margin: 40px; color: #333; }
+  h1 { text-align: center; color: #2a6acb; }
+  .question { background: white; padding: 15px; margin: 15px 0; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+  button { background-color: #2a6acb; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-right: 10px; }
+  button:hover { background-color: #1e4f9c; }
+  #result { font-weight: bold; font-size: 1.2em; text-align: center; margin-top: 20px; }
+  .correct { color: green; font-weight: bold; }
+  .incorrect { color: red; font-weight: bold; }
+  #progressContainer { width: 100%; background: #ddd; border-radius: 10px; margin-top: 15px; }
+  #progressBar { width: 0%; height: 20px; background: #2a6acb; border-radius: 10px; transition: width 0.5s ease; }
+</style>
+</head>
+<body>
+<h1>Test Interactivo HTML</h1>
+<div id="quiz"></div>
+<div style="text-align:center; margin-top:20px;">
+  <button onclick="checkAnswers()">Enviar respuestas</button>
+  <button onclick="resetQuiz()">Reiniciar</button>
+</div>
+<div id="progressContainer"><div id="progressBar"></div></div>
+<p id="result"></p>
+
+<script>
+const questions = [
+  {q: 'Que significa HTML', options: ['HyperText Markup Language','HighText Machine Language','HyperTool Multi Language','Home Tool Markup Language'], correct: 0},
+  {q: 'Cual es la estructura basica de un documento HTML', options: ['html head body','head body html','body head html','html body head'], correct: 0},
+  {q: 'Que etiqueta se usa para definir el titulo de la pagina', options: ['title','head','meta','h1'], correct: 0},
+  {q: 'Que atributo se usa para establecer el color de fondo en body', options: ['background','bgcolor','color','style'], correct: 1},
+  {q: 'Cual es la funcion de la etiqueta p', options: ['Crear una tabla','Insertar una imagen','Definir un parrafo','Agregar un enlace'], correct: 2},
+  {q: 'Que etiqueta se usa para insertar una imagen', options: ['img','image','src','pic'], correct: 0},
+  {q: 'Que atributo en img define el texto alternativo', options: ['alt','title','text','description'], correct: 0},
+  {q: 'Que etiqueta se usa para crear listas ordenadas', options: ['ul','ol','li','dl'], correct: 1},
+  {q: 'Que etiqueta se usa para crear listas no ordenadas', options: ['ul','ol','li','dl'], correct: 0},
+  {q: 'Que etiqueta se usa para definir un enlace', options: ['a','link','href','url'], correct: 0},
+  {q: 'Que atributo se usa para definir la direccion de un enlace', options: ['href','src','link','target'], correct: 0},
+  {q: 'Que etiqueta se usa para crear una tabla', options: ['table','tab','grid','td'], correct: 0},
+  {q: 'Que etiqueta se usa para definir una celda de datos en una tabla', options: ['td','tr','th','cell'], correct: 0},
+  {q: 'Que etiqueta se usa para definir una fila en una tabla', options: ['tr','td','th','row'], correct: 0},
+  {q: 'Que etiqueta se usa para definir una celda de encabezado en una tabla', options: ['th','td','tr','caption'], correct: 0},
+  {q: 'Que etiqueta se usa para crear un formulario', options: ['form','input','textarea','select'], correct: 0},
+  {q: 'Que etiqueta se usa para crear un campo de entrada de texto', options: ['input','form','textarea','label'], correct: 0},
+  {q: 'Que etiqueta se usa para crear un area de texto multilinea', options: ['textarea','input','form','label'], correct: 0},
+  {q: 'Que atributo se usa para hacer obligatorio un campo en un formulario', options: ['required','mandatory','obligatory','validate'], correct: 0},
+  {q: 'Que etiqueta se usa para agrupar elementos relacionados en un formulario', options: ['fieldset','group','section','div'], correct: 0}
+];
+
+const quizContainer = document.getElementById('quiz');
+const progressBar = document.getElementById('progressBar');
+
+questions.forEach((item, i) => {
+  const div = document.createElement('div');
+  div.classList.add('question');
+  div.innerHTML = 'Pregunta ' + (i + 1) + ': ' + item.q + '<br>' +
+    item.options.map((opt, j) => '<label><input type=radio name=q' + i + ' value=' + j + '> ' + opt + '</label><br>').join('');
+  quizContainer.appendChild(div);
+});
+
+function checkAnswers() {
+  let score = 0;
+  questions.forEach((item, i) => {
+    const selected = document.querySelector('input[name=q' + i + ']:checked');
+    const div = quizContainer.children[i];
+    const labels = div.querySelectorAll('label');
+    labels.forEach((l, idx) => {
+      l.classList.remove('correct','incorrect');
+      if (idx === item.correct) l.classList.add('correct');
+      if (selected && idx == selected.value && idx !== item.correct) l.classList.add('incorrect');
+    });
+    if (selected && parseInt(selected.value) === item.correct) score++;
+  });
+  const percent = (score / questions.length) * 100;
+  progressBar.style.width = percent + '%';
+
+  let message = '';
+  if (percent === 100) message = 'Excelente Has contestado todo correctamente';
+  else if (percent >= 80) message = 'Muy bien Tienes un gran dominio del tema';
+  else if (percent >= 50) message = 'Buen intento Sigue practicando';
+  else message = 'Puedes mejorar Repasa el contenido e intentalo otra vez';
+
+  document.getElementById('result').innerHTML = 'Resultado: ' + score + ' de ' + questions.length + '<br>' + message;
+}
+
+function resetQuiz() {
+  document.querySelectorAll('input[type=radio]').forEach(r => r.checked = false);
+  document.querySelectorAll('label').forEach(l => l.classList.remove('correct','incorrect'));
+  document.getElementById('result').textContent = '';
+  progressBar.style.width = '0%';
+}
+</script>
+</body>
+</html>

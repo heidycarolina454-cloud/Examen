@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Interactivo - Arquitectura Cliente Servidor</title>
+<style>
+  body { font-family: Arial, sans-serif; background-color: #f5f7fa; margin: 40px; color: #333; }
+  h1 { text-align: center; color: #2a6acb; }
+  .question { background: white; padding: 15px; margin: 15px 0; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+  button { background-color: #2a6acb; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-right: 10px; }
+  button:hover { background-color: #1e4f9c; }
+  #result { font-weight: bold; font-size: 1.2em; text-align: center; margin-top: 20px; }
+  .correct { color: green; font-weight: bold; }
+  .incorrect { color: red; font-weight: bold; }
+  #progressContainer { width: 100%; background: #ddd; border-radius: 10px; margin-top: 15px; }
+  #progressBar { width: 0%; height: 20px; background: #2a6acb; border-radius: 10px; transition: width 0.5s ease; }
+</style>
+</head>
+<body>
+<h1>Test Interactivo - Arquitectura Cliente Servidor</h1>
+<div id="quiz"></div>
+<div style="text-align:center; margin-top:20px;">
+  <button onclick="checkAnswers()">Enviar respuestas</button>
+  <button onclick="resetQuiz()">Reiniciar</button>
+</div>
+<div id="progressContainer"><div id="progressBar"></div></div>
+<p id="result"></p>
+
+<script>
+const questions = [
+  {q: '¿Qué es el modelo cliente-servidor?', options: ['Una red local sin jerarquía','Un modelo donde el cliente solicita servicios y el servidor los proporciona','Un tipo de base de datos relacional','Un lenguaje de programación web'], correct: 1},
+  {q: '¿Qué función cumple el cliente en este modelo?', options: ['Procesar la lógica de negocio','Solicitar servicios o recursos al servidor','Almacenar datos en una base de datos','Cifrar la comunicación'], correct: 1},
+  {q: '¿Cuál es el protocolo más usado para la comunicación web?', options: ['FTP','SMTP','HTTP','SSH'], correct: 2},
+  {q: '¿Qué diferencia hay entre el front-end y el back-end?', options: ['El front-end maneja la lógica y el back-end la interfaz','El front-end es visible para el usuario y el back-end maneja la lógica y los datos','Ambos hacen lo mismo','El front-end se ejecuta en el servidor'], correct: 1},
+  {q: '¿Qué caracteriza a la arquitectura cliente-servidor de dos capas?', options: ['Separa presentación, lógica y datos','El cliente se conecta directamente al servidor de datos','Usa varios servidores intermedios','Solo se usa en redes locales'], correct: 1},
+  {q: '¿Qué capa se encarga de la presentación en una arquitectura de dos capas?', options: ['Capa de datos','Capa de aplicación','Capa de presentación','Capa lógica'], correct: 2},
+  {q: '¿Qué caracteriza a la arquitectura cliente-servidor de tres capas?', options: ['Solo usa dos niveles físicos','Separa la aplicación en cliente, servidor intermedio y base de datos','Usa un único servidor para todo','No necesita conexión de red'], correct: 1},
+  {q: '¿Qué función cumple el nivel de aplicación o lógica?', options: ['Mostrar la interfaz al usuario','Procesar la lógica de negocio y coordinar cliente y base de datos','Almacenar datos','Crear el diseño visual'], correct: 1},
+  {q: '¿Qué tecnología se usa normalmente para el nivel de datos?', options: ['HTML y CSS','MySQL, Oracle o PostgreSQL','JavaScript y PHP','Python y Flask'], correct: 1},
+  {q: '¿Qué es HTTP?', options: ['Un protocolo de transferencia de hipertexto usado para la comunicación web','Un lenguaje de programación','Un navegador web','Una base de datos'], correct: 0},
+  {q: '¿Qué diferencia principal tiene HTTPS respecto a HTTP?', options: ['Es más rápido','Cifra la comunicación entre cliente y servidor','Usa un puerto diferente sin cifrado','Solo sirve para redes locales'], correct: 1},
+  {q: '¿Qué puerto usa HTTPS normalmente?', options: ['21','25','80','443'], correct: 3},
+  {q: '¿Qué lenguajes se usan en el lado cliente?', options: ['HTML, CSS y JavaScript','Python y PHP','Java y C#','SQL y MongoDB'], correct: 0},
+  {q: '¿Qué lenguajes se usan en el lado servidor?', options: ['JavaScript (Node.js), PHP, Python, Java, Ruby','HTML y CSS','React y Angular','SQL y XML'], correct: 0},
+  {q: '¿Qué función cumple el servidor web?', options: ['Interpretar el código HTML y mostrarlo al usuario','Procesar solicitudes y enviar respuestas al cliente','Controlar el sistema operativo del cliente','Crear archivos multimedia'], correct: 1}
+];
+
+const quizContainer = document.getElementById('quiz');
+const progressBar = document.getElementById('progressBar');
+
+questions.forEach((item, i) => {
+  const div = document.createElement('div');
+  div.classList.add('question');
+  div.innerHTML = `<p><b>${i + 1}. ${item.q}</b></p>` +
+    item.options.map((opt, j) => `<label><input type='radio' name='q${i}' value='${j}'> ${opt}</label><br>`).join('');
+  quizContainer.appendChild(div);
+});
+
+function checkAnswers() {
+  let score = 0;
+  questions.forEach((item, i) => {
+    const selected = document.querySelector(`input[name='q${i}']:checked`);
+    const div = quizContainer.children[i];
+    const labels = div.querySelectorAll('label');
+    labels.forEach((l, idx) => {
+      l.classList.remove('correct','incorrect');
+      if (idx === item.correct) l.classList.add('correct');
+      if (selected && idx == selected.value && idx !== item.correct) l.classList.add('incorrect');
+    });
+    if (selected && parseInt(selected.value) === item.correct) score++;
+  });
+  const percent = (score / questions.length) * 100;
+  progressBar.style.width = percent + '%';
+
+  let message = '';
+  if (percent === 100) message = '🌟 ¡Excelente! Has contestado todo correctamente.';
+  else if (percent >= 80) message = '👏 Muy bien, tienes un gran dominio del tema.';
+  else if (percent >= 50) message = '👍 Buen intento, sigue practicando.';
+  else message = '💡 Puedes mejorar, repasa el contenido e inténtalo otra vez.';
+
+  document.getElementById('result').innerHTML = `Resultado: ${score} / ${questions.length} <br>${message}`;
+}
+
+function resetQuiz() {
+  document.querySelectorAll('input[type=radio]').forEach(r => r.checked = false);
+  document.querySelectorAll('label').forEach(l => l.classList.remove('correct','incorrect'));
+  document.getElementById('result').textContent = '';
+  progressBar.style.width = '0%';
+}
+</script>
+</body>
+</html>
