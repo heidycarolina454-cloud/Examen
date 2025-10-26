@@ -2,9 +2,10 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Test Interactivo Propiedades CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Interactivo - Propiedades CSS</title>
 <style>
-  body { font-family: Arial; background-color: #f5f7fa; margin: 40px; color: #333; }
+  body { font-family: Arial, sans-serif; background-color: #f5f7fa; margin: 40px; color: #333; }
   h1 { text-align: center; color: #2a6acb; }
   .question { background: white; padding: 15px; margin: 15px 0; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
   button { background-color: #2a6acb; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-right: 10px; }
@@ -17,7 +18,81 @@
 </style>
 </head>
 <body>
-<h1>Test Interactivo Propiedades CSS</h1>
+<h1>Test Interactivo - Propiedades CSS</h1>
 <div id="quiz"></div>
 <div style="text-align:center; margin-top:20px;">
-  <button onclick="checkAnswers()">Enviar respuestas
+  <button onclick="checkAnswers()">Enviar respuestas</button>
+  <button onclick="resetQuiz()">Reiniciar</button>
+</div>
+<div id="progressContainer"><div id="progressBar"></div></div>
+<p id="result"></p>
+
+<script>
+const questions = [
+  {q: '¿Cuál de las siguientes es una unidad de medida absoluta en CSS?', options: ['em','px','%','rem'], correct: 1},
+  {q: '¿Qué propiedad se utiliza para establecer la altura mínima de un elemento?', options: ['height','min-height','max-height','line-height'], correct: 1},
+  {q: '¿Cómo se aplica un color hexadecimal en CSS?', options: ['color: 255,0,0;','color: #FF0000;','color: rgb(255,0,0);','color: red;'], correct: 1},
+  {q: '¿Qué propiedad se usa para cambiar el tipo de letra?', options: ['font-style','font-weight','font-family','text-decoration'], correct: 2},
+  {q: '¿Qué valor de text-decoration subraya el texto?', options: ['line-through','overline','underline','none'], correct: 2},
+  {q: '¿Qué propiedad controla el espacio entre letras?', options: ['word-spacing','letter-spacing','line-height','text-indent'], correct: 1},
+  {q: '¿Qué propiedad alinea el texto al centro?', options: ['text-align: left;','text-align: right;','text-align: center;','text-align: justify;'], correct: 2},
+  {q: '¿Cuál es la diferencia entre padding y margin?', options: ['Padding es externo, margin es interno','Padding es interno, margin es externo','Ambos son externos','Ambos son internos'], correct: 1},
+  {q: '¿Qué propiedad aplica un borde a un elemento?', options: ['border-style','border','border-width','border-color'], correct: 1},
+  {q: '¿Qué valor de font-weight aplica negrita?', options: ['normal','bold','italic','underline'], correct: 1},
+  {q: '¿Qué unidad relativa se adapta al tamaño de letra del usuario?', options: ['px','pt','em','cm'], correct: 2},
+  {q: '¿Qué propiedad establece el espacio entre palabras?', options: ['letter-spacing','word-spacing','text-indent','line-height'], correct: 1},
+  {q: '¿Qué propiedad establece la altura de línea?', options: ['line-height','height','min-height','text-align'], correct: 0},
+  {q: '¿Qué propiedad aplica sangría a la primera línea?', options: ['text-indent','text-align','margin-left','padding-left'], correct: 0},
+  {q: '¿Qué valor de border-style crea un borde punteado?', options: ['solid','dashed','dotted','groove'], correct: 2},
+  {q: '¿Cómo se aplica un borde azul de 2px en una línea?', options: ['border: 2px solid blue;','border-color: blue;','border-width: 2px;','border-style: solid;'], correct: 0},
+  {q: '¿Qué propiedad establece el ancho de un elemento?', options: ['height','width','size','length'], correct: 1},
+  {q: '¿Qué valor elimina el subrayado de un enlace?', options: ['underline','none','bold','italic'], correct: 1},
+  {q: '¿Qué propiedad centra un elemento en su contenedor?', options: ['margin: auto;','padding: auto;','text-align: center;','align: center;'], correct: 0},
+  {q: '¿Qué propiedad aplica color de fondo?', options: ['color','border-color','background-color','font-color'], correct: 2}
+];
+
+const quizContainer = document.getElementById('quiz');
+const progressBar = document.getElementById('progressBar');
+
+questions.forEach((item, i) => {
+  const div = document.createElement('div');
+  div.classList.add('question');
+  div.innerHTML = `<p><b>${i + 1}. ${item.q}</b></p>` +
+    item.options.map((opt, j) => `<label><input type='radio' name='q${i}' value='${j}'> ${opt}</label><br>`).join('');
+  quizContainer.appendChild(div);
+});
+
+function checkAnswers() {
+  let score = 0;
+  questions.forEach((item, i) => {
+    const selected = document.querySelector(`input[name='q${i}']:checked`);
+    const div = quizContainer.children[i];
+    const labels = div.querySelectorAll('label');
+    labels.forEach((l, idx) => {
+      l.classList.remove('correct','incorrect');
+      if (idx === item.correct) l.classList.add('correct');
+      if (selected && idx == selected.value && idx !== item.correct) l.classList.add('incorrect');
+    });
+    if (selected && parseInt(selected.value) === item.correct) score++;
+  });
+  const percent = (score / questions.length) * 100;
+  progressBar.style.width = percent + '%';
+
+  let message = '';
+  if (percent === 100) message = '🌟 ¡Excelente! Has contestado todo correctamente.';
+  else if (percent >= 80) message = '👏 Muy bien, tienes un gran dominio del tema.';
+  else if (percent >= 50) message = '👍 Buen intento, sigue practicando.';
+  else message = '💡 Puedes mejorar, repasa el contenido e inténtalo otra vez.';
+
+  document.getElementById('result').innerHTML = `Resultado: ${score} / ${questions.length} <br>${message}`;
+}
+
+function resetQuiz() {
+  document.querySelectorAll('input[type=radio]').forEach(r => r.checked = false);
+  document.querySelectorAll('label').forEach(l => l.classList.remove('correct','incorrect'));
+  document.getElementById('result').textContent = '';
+  progressBar.style.width = '0%';
+}
+</script>
+</body>
+</html>
